@@ -4,6 +4,7 @@ from functools import wraps
 import jwt
 import os
 from src.model.db import User
+from flask_cors import cross_origin
 
 
 def authenticate(func):
@@ -28,4 +29,4 @@ def authenticate(func):
 
 
 class Resource(flask_restful.Resource):
-    method_decorators = [authenticate]
+    method_decorators = [authenticate, cross_origin]

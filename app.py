@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from src.auth_routes import auth_routes
 from src.api_routes import *
 from src.model.db import db, create_db
@@ -9,6 +10,7 @@ import os
 
 def create_app(config_file="src/app/flask_app_settings.py"):
     app = Flask(__name__)
+    CORS(app, resources={r"*": {"origins": os.getenv("CORS_ORIGIN_URL")}})
     app.config.from_pyfile(config_file)
 
     app.register_blueprint(auth_routes)
